@@ -1,6 +1,7 @@
 let currentStep = 0, currentStep2 = 0;
 var userInfo;
 var ele_matchTimes2 = [];
+var post_pointer = 0;
 
 // wait for data from plugin
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
@@ -69,7 +70,7 @@ function convrtTime(str) {
       var post_select = document.getElementById("post_select")
       if (post_select) {
           for (var i = 0; i < post_select.options.length; i++) {
-              if (post_select.options[i].text == userInfo["OFC-POST"]) {
+              if (post_select.options[i].text == userInfo["OFC-POST"][post_pointer % userInfo["OFC-POST"].length]) {
                   post_select.value = post_select.options[i].value
                   const event = new Event("change", {
                       bubbles: true, // Allow the event to bubble up the DOM tree
@@ -130,6 +131,11 @@ function convrtTime(str) {
           foundDateObj = availableDates[i];
           break;
         }
+        if(i == (availableDates.length-1)){
+          post_pointer ++;
+          currentStep = 1;
+          step1(currentStep)
+        }
       }
 
       if(!foundDate) {
@@ -138,8 +144,8 @@ function convrtTime(str) {
         return;
       }
 
-      // got date return
-      document.querySelector('#datepicker').value = `${foundDate.getDate()}/${foundDate.getMonth()+1}/${foundDate.getFullYear()}`;
+      // got date returnfoundDate.getMonth()+1
+      document.querySelector('#datepicker').value = `${foundDate.getMonth()+1}/${foundDate.getDate()}/${foundDate.getFullYear()}`;
 
       // inject a script to substitute for calender onSelect event
       const getDateTimes = document.createElement("button");

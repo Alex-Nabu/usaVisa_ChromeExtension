@@ -261,7 +261,7 @@ function convrtTime(str) {
 
             if((new Date(a_time_cell) >= new Date(u_s_t)) && (new Date(a_time_cell) <= new Date(u_e_t))){
               ele.click()
-              return step7();
+              return setTimeout(step7, 500);
             }
           }
         }
@@ -269,8 +269,7 @@ function convrtTime(str) {
   }
   function step7(step) { // click the submit button
       console.log(`7 : click the submit button`)
-      // var submitBtn = document.getElementById("submitbtn");
+      var submitBtn = document.getElementById("submitbtn");
       // submitBtn && submitBtn.click()
-      console.log(`got to step 7`);
       return;
   }

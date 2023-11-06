@@ -276,6 +276,9 @@ function convrtTime(str) {
   function step7(step) { // click the submit button
       console.log(`7 : click the submit button`)
       var submitBtn = document.getElementById("submitbtn");
-      // submitBtn && submitBtn.click()
+      if(window.location.pathname.toLowerCase() == "/en-us/schedule/"){
+        return ;
+      }
+      submitBtn && submitBtn.click()
       return;
   }

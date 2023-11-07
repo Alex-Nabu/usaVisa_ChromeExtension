@@ -12,7 +12,7 @@ function isJSON(str) {
   }
 }
 
-function sendData() {
+function sendData() { // Start Scheduling Onclick Event
   var textarea = document.getElementById("userInfo");
   if(!isJSON(textarea.value)){
     alert("Please input your infomation correctly!")
@@ -26,13 +26,13 @@ function sendData() {
     // tabs is an array of tabs that match the query
     if (tabs.length > 0) {
         const currentTab = tabs[0];
-        chrome.tabs.sendMessage(currentTab.id, { type: 'popup-message', message: userInfo });
+        chrome.tabs.sendMessage(currentTab.id, { type: 'ofc-schedule_start', message: userInfo });
     } else {
     }
   });
 }
 
-function stopProcess() {
+function stopProcess() { // Stop auto-processing
   chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
     // tabs is an array of tabs that match the query
     if (tabs.length > 0) {
@@ -43,6 +43,7 @@ function stopProcess() {
   });
 }
 
+// fetch message from content.js for scheduling action.
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if(message.type == "req_UserInfo"){
     chrome.storage.local.get("userInfo", function(result) {

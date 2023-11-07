@@ -8,8 +8,6 @@ var lp_pos = 0, lp_pos2 = 0;
 var action_stop = false;
 var ofc_waitTime = 1000;
 
-console.log("content.js reloaded!!!");
-
 // wait for data from plugin
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.type === "popup-message") {
@@ -73,7 +71,6 @@ function convrtTime(str) {
 let waitTime = 1000;
 function step0(step) {
   // wait for ofc load
-  console.log(`0 : wait for ofc load`);
   var g_mem = document.getElementById("gm_select");
   if (g_mem) {
     if (g_mem.childNodes.length < 1) {
@@ -85,7 +82,6 @@ function step0(step) {
       return setTimeout(step1(currentStep), ofc_waitTime);
     }
   }
-  console.log(step);
 }
 function step1(step) {
   // set OFC Post value setting
@@ -111,7 +107,6 @@ function step1(step) {
     }
   }
   currentStep = 2;
-  console.log(step);
   return step2();
 }
 function step2(step) {
@@ -125,7 +120,6 @@ function step2(step) {
     if (openCalendar.value == "") {
       currentStep = 0;
       post_pointer++;
-      console.log(ofc_waitTime)
       return setTimeout(step1(currentStep), ofc_waitTime);
     } else {
       if (openCalendar.value == "Loading...") {
@@ -139,7 +133,6 @@ function step2(step) {
       }
     }
   }
-  console.log(step);
 }
 function step3(step) {
   if(action_stop){
@@ -169,11 +162,9 @@ function step3(step) {
       if ((i == availableDates.length - 1) && (ele_matchTimes.length == 0)) {
         post_pointer++;
         currentStep = 1;  
-        console.log(ofc_waitTime)
         setTimeout(step1(currentStep), ofc_waitTime);
       }
     }
-    console.log(ele_matchTimes)
 
     if (ele_matchTimes.length == 0) {
       currentStep = 0;
@@ -184,11 +175,8 @@ function step3(step) {
     return step4();
   } else {
     currentStep = 0;
-    console.log(step);
     return;
   }
-
-  console.log(step);
 }
 function step4() {
   if(action_stop){
@@ -197,7 +185,6 @@ function step4() {
   if(lp_pos == ele_matchTimes.length){
     console.log("Change Post")
     post_pointer ++;
-    console.log(ofc_waitTime)
     return setTimeout(step1(currentStep), ofc_waitTime);
   }
   if(ele_matchTimes.length == 0){
@@ -363,7 +350,6 @@ function next_step0(step) {
   } else {
     return next_step0()
   }
-  console.log(step);
 }
 function next_step1(step) {
   if(action_stop){
@@ -391,7 +377,6 @@ function next_step1(step) {
     }
   }
   currentStep = 2;
-  console.log(step);
   return next_step2();
 }
 function next_step2(step) {
@@ -418,7 +403,6 @@ function next_step2(step) {
       }
     }
   }
-  console.log(step);
 }
 function next_step3(step) {
   if(action_stop){
@@ -462,7 +446,6 @@ function next_step3(step) {
     return next_step6();
   } else {
     currentStep = 0;
-    console.log(step);
     return;
   }
 
@@ -474,7 +457,6 @@ function next_step4(step) {
   if(lp_pos2 == ele_matchTimes2.length){
     console.log("Change Post")
     post_pointer ++;
-    console.log(ofc_waitTime)
     return setTimeout(step1(currentStep), ofc_waitTime);
   }
   if(ele_matchTimes.length == 0){
@@ -624,5 +606,4 @@ function next_step7(step) {
     return false;
   }
   // click the submit button
-  console.log(step);
 }

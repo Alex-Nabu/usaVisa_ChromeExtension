@@ -81,6 +81,7 @@ function step0(step) {
       return setTimeout(step0, waitTime);
     } else {
       currentStep = 1;
+      console.log(ofc_waitTime)
       return setTimeout(step1(currentStep), ofc_waitTime);
     }
   }
@@ -124,6 +125,7 @@ function step2(step) {
     if (openCalendar.value == "") {
       currentStep = 0;
       post_pointer++;
+      console.log(ofc_waitTime)
       return setTimeout(step1(currentStep), ofc_waitTime);
     } else {
       if (openCalendar.value == "Loading...") {
@@ -167,6 +169,7 @@ function step3(step) {
       if ((i == availableDates.length - 1) && (ele_matchTimes.length == 0)) {
         post_pointer++;
         currentStep = 1;  
+        console.log(ofc_waitTime)
         setTimeout(step1(currentStep), ofc_waitTime);
       }
     }
@@ -194,6 +197,7 @@ function step4() {
   if(lp_pos == ele_matchTimes.length){
     console.log("Change Post")
     post_pointer ++;
+    console.log(ofc_waitTime)
     return setTimeout(step1(currentStep), ofc_waitTime);
   }
   if(ele_matchTimes.length == 0){
@@ -470,6 +474,7 @@ function next_step4(step) {
   if(lp_pos2 == ele_matchTimes2.length){
     console.log("Change Post")
     post_pointer ++;
+    console.log(ofc_waitTime)
     return setTimeout(step1(currentStep), ofc_waitTime);
   }
   if(ele_matchTimes.length == 0){

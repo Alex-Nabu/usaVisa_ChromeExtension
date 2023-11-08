@@ -627,8 +627,3 @@ function saveDataToFile(data, fileName) {
   a.download = fileName;
   a.click();
 }
-
-const data = "Hello, world!";
-if(window.location.pathname.toLowerCase() == "/en-us/ofc-schedule/"){
-  saveDataToFile(data, `error-${new Date()}.txt`);
-}
